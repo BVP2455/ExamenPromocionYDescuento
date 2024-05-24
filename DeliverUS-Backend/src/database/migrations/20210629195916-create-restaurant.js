@@ -40,6 +40,11 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
+      descuento: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       logo: {
         type: Sequelize.STRING
       },

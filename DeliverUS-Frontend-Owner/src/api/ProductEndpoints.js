@@ -20,4 +20,8 @@ function remove (id) {
   return destroy(`products/${id}`)
 }
 
-export { getDetail, getProductCategories, create, update, remove }
+function changePromoted(id){
+  return patch(`products/${id}`)
+}
+
+export { getDetail, getProductCategories, create, update, remove, changePromoted }
