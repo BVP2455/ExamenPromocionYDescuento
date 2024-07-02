@@ -25,6 +25,11 @@ module.exports = {
       url: {
         type: Sequelize.STRING
       },
+      descuento: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       shippingCosts: {
         allowNull: false,
         defaultValue: 0.0,
@@ -39,11 +44,6 @@ module.exports = {
       },
       phone: {
         type: Sequelize.STRING
-      },
-      descuento: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        defaultValue: 0
       },
       logo: {
         type: Sequelize.STRING

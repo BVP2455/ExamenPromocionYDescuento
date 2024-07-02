@@ -22,7 +22,7 @@ export default function EditRestaurantScreen ({ navigation, route }) {
   const [backendErrors, setBackendErrors] = useState()
   const [restaurant, setRestaurant] = useState({})
 
-  const [initialRestaurantValues, setInitialRestaurantValues] = useState({ name: null, description: null, address: null, postalCode: null, url: null, shippingCosts: null, email: null, phone: null, descuento: 0, restaurantCategoryId: null, logo: null, heroImage: null })
+  const [initialRestaurantValues, setInitialRestaurantValues] = useState({ name: null, description: null, address: null, postalCode: null, url: null, shippingCosts: null, email: null, phone: null, restaurantCategoryId: null, logo: null, heroImage: null, descuento: 0 })
   const validationSchema = yup.object().shape({
     name: yup
       .string()
@@ -52,15 +52,14 @@ export default function EditRestaurantScreen ({ navigation, route }) {
       .string()
       .nullable()
       .max(255, 'Phone too long'),
-    descuento: yup
-      .number()
-      .min(0)
-      .max(100),
     restaurantCategoryId: yup
       .number()
       .positive()
       .integer()
-      .required('Restaurant category is required')
+      .required('Restaurant category is required'),
+    descuento: yup.number()
+      .min(0)
+      .max(100)
   })
 
   useEffect(() => {
@@ -190,7 +189,7 @@ export default function EditRestaurantScreen ({ navigation, route }) {
                 name='phone'
                 label='Phone:'
               />
-               <InputItem
+              <InputItem
                 name='descuento'
                 label='Descuento:'
               />

@@ -4,7 +4,7 @@ import { StyleSheet, View, FlatList, ImageBackground, Image, Pressable } from 'r
 import { showMessage } from 'react-native-flash-message'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { getDetail } from '../../api/RestaurantEndpoints'
-import { remove } from '../../api/ProductEndpoints'
+import { remove, changePromocionado } from '../../api/ProductEndpoints'
 import ImageCard from '../../components/ImageCard'
 import TextRegular from '../../components/TextRegular'
 import TextSemiBold from '../../components/TextSemibold'
@@ -61,7 +61,7 @@ export default function RestaurantDetailScreen ({ navigation, route }) {
         title={(
           <View style = {styles.productDetailsContainer}>
              <TextRegular style= {styles.title}>{item.name}</TextRegular>
-            {restaurant.descuento !== 0 && item.promoted && <TextRegular textStyle = {styles.priceOff} numberOfLines={2}>({route.params.descuento}% off)</TextRegular>}
+            {restaurant.descuento !== 0 && item.promocionado && <TextRegular textStyle = {styles.priceOff} numberOfLines={2}>({route.params.descuento}% off)</TextRegular>}
         </View>)}
        >
        <TextRegular numberOfLines={2}>{item.description}</TextRegular>
@@ -112,7 +112,7 @@ export default function RestaurantDetailScreen ({ navigation, route }) {
         </Pressable>
         {route.params.descuento > 0 &&
         <Pressable
-            onPress={() => changeProductPromoted(item) }
+            onPress={() => changeProductPromocionado(item) }
             style={({ pressed }) => [
               {
                 backgroundColor: pressed
@@ -124,7 +124,7 @@ export default function RestaurantDetailScreen ({ navigation, route }) {
           <View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'center' }]}>
             <MaterialCommunityIcons name='pencil' color={'white'} size={20}/>
             <TextRegular textStyle={styles.text}>
-            {item.promoted ? 'Demote' : 'Promote'}
+            {item.promocionado ? 'Demote' : 'Promote'}
             </TextRegular>
           </View>
         </Pressable>
@@ -134,9 +134,9 @@ export default function RestaurantDetailScreen ({ navigation, route }) {
     )
   }
 
-  const changeProductPromoted = async (item) => {
+  const changeProductPromocionado = async (item) => {
     try {
-      await changePromoted(item.id)
+      await changePromocionado(item.id)
       await fetchRestaurantDetail()
     } catch (error) {
       showMessage({

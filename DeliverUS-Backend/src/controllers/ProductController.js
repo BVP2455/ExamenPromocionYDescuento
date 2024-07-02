@@ -107,7 +107,7 @@ const popular = async function (req, res) {
   }
 }
 
-const changePromotion = async function (req, res) {
+const changePromocion = async function (req, res) {
   try {
     const updatedProduct = await Product.findByPk(req.params.productId)
     if (updatedProduct.promocionado) {
@@ -129,6 +129,6 @@ const ProductController = {
   update,
   destroy,
   popular,
-  changePromotion
+  changePromocion
 }
 export default ProductController

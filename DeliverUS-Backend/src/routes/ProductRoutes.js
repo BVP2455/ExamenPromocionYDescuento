@@ -50,7 +50,7 @@ const loadFileRoutes = (app) => {
       checkEntityExists(Product, 'productId'),
       ProductMiddleware.checkProductOwnership,
       ProductMiddleware.checkRestaurantDescuento,
-      ProductController.changePromotion
+      ProductController.changePromocion
     )
 }
 export default loadFileRoutes
